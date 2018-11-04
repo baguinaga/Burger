@@ -1,28 +1,40 @@
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function() {
-  $(".change-sleep").on("click", function(event) {
-    var id = $(this).data("id");
-    var newSleep = $(this).data("newsleep");
+$(function () {
+  $(".change-devoured").on("click", function (event) {
+    event.preventDefault();
 
-    var newSleepState = {
-      sleepy: newSleep
+    const id = $(this).data("id");
+    const newDevoured = $(this).data("devoured");
+    const newDevouredState = {
+      devoured: newDevoured
     };
 
-    // Send the PUT request.
-    $.ajax("/api/cats/" + id, {
+    $.ajax(`/api/burgers/ ${id}`, {
       type: "PUT",
-      data: newSleepState
+      data: newDevouredState
     }).then(
-      function() {
-        console.log("changed sleep to", newSleep);
-        // Reload the page to get the updated list
+      function () {
+        console.log("Changed 'Devoured' state:", newDevoured);
         location.reload();
       }
     );
   });
 
-  $(".create-form").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
+  $(".delete-burger").on("click", function (event) {
+    event.preventDefault();
+
+    const id = $(this).data("id");
+
+    $.ajax(`/api/burgers/${id}`, {
+      type: "DELETE"
+    }).then(
+      function () {
+        console.log("Deleted Burger: ", id);
+        location.reload();
+      }
+    );
+  });
+
+  $(".create-form").on("submit", function (event) {
     event.preventDefault();
 
     var newCat = {
@@ -30,29 +42,12 @@ $(function() {
       sleepy: $("[name=sleepy]:checked").val().trim()
     };
 
-    // Send the POST request.
     $.ajax("/api/cats", {
       type: "POST",
       data: newCat
     }).then(
-      function() {
+      function () {
         console.log("created new cat");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
-  $(".delete-cat").on("click", function(event) {
-    var id = $(this).data("id");
-
-    // Send the DELETE request.
-    $.ajax("/api/cats/" + id, {
-      type: "DELETE"
-    }).then(
-      function() {
-        console.log("deleted cat", id);
-        // Reload the page to get the updated list
         location.reload();
       }
     );

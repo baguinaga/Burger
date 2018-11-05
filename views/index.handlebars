@@ -1,38 +1,67 @@
-<h1>Burgers!</h1>
+<div class="container-fluid">
+  <div class="row justify-content-between">
+    <nav class="col-12 navbar">
+      <a class="navbar-brand" href="/">
+        <img src="/assets/img/burger.svg" width="70" height="70" class="d-inline-block align-top"
+          alt="Burger Icon">
+      </a>
+      <h1 class="display-4">Burgers!</h1>
+      <p class="lead my-0">A list of all the burgers you have ready to eat! It's very, uh ... useful?</p>
+    </nav>
+  </div>
+</div>
 
-<h2>Not yet eaten!</h2>
 
-<ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
+<div class="container">
+  <div class="row justify-content-between my-4">
+    <div class="col-12 col-md-5 burger_div py-3" id="available">
+      <h2 class="text-center">Not yet eaten!</h2>
 
-<h2>Gone! You ate them ... </h2>
+      <ul>
+        {{#each burgers}}
+        {{#unless devoured}}
+        {{> burgers/burger-block devoured=true}}
+        {{/unless}}
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col-12 col-md-5 burger_div py-3" id="eaten">
+      <h2 class="text-center">Gone! You ate them ... </h2>
 
-<ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burgers/burger-block devoured=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Burger!</h2>
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="burger_name">Burger Name:</label>
-    <input type="text" id="burger_name" name="burger_name">
+      <ul>
+        {{#each burgers}}
+        {{#if devoured}}
+        {{> burgers/burger-block devoured=false}}
+        {{/if}}
+        {{/each}}
+      </ul>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="devoured">Devoured?</label><br>
-    <input type="radio" name="devoured" value="1" checked> Gone!<br>
-    <input type="radio" name="devoured" value="0"> Ready to eat!
+  <div class="row justify-content-center my-4">
+    <div class="col-7" id="formDiv">
+      <h2 class="text-center">Add a Burger!</h2>
+  
+      <form class="form-row create-form text-center">
+
+        <div class="col-4 form-group">
+          <label for="burger_name">Burger Name:</label>
+          <input type="text" id="burger_name" name="burger_name">
+        </div>
+
+        <div class="col-4 form-group radio_Div">
+          <div class="text-center">
+            <label for="devoured">Devoured?</label><br>
+          </div>
+          <input type="radio" name="devoured" value="1" checked> Gone!<br>
+          <input type="radio" name="devoured" value="0"> Ready to eat!
+        </div>
+
+        <div class="col-4 my-auto">
+          <button class="btn btn-primary btn-lg" type="submit">Add Burger</button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <button type="submit">Add Burger</button>
-</form>
+</div>

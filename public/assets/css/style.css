@@ -2,3 +2,45 @@ body {
   background: url(/assets/img/fastfood.jpg);
   background-size: 100%;
 }
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  font-size: 1.2em;
+}
+
+label {
+  font-size: 1.5em;
+}
+
+.radio_Div {
+  text-align: left;
+}
+
+.navbar {
+  background: rgba(163, 226, 215, 0.95);
+}
+
+.burger_div {
+  text-align: center;
+  border: 0.10em solid black;
+}
+
+.burger_div h2 {
+  font-size: 2em;
+}
+
+#available {
+  background: rgba(250, 211, 150, 0.90);
+}
+
+#eaten {
+  background: rgba(250, 175, 72, 0.90);
+}
+
+#formDiv {
+  background: rgba(253, 101, 106, 0.90);
+  border: 0.10em solid black;
+}

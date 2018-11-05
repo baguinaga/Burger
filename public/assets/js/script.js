@@ -37,17 +37,17 @@ $(function () {
   $(".create-form").on("submit", function (event) {
     event.preventDefault();
 
-    var newCat = {
-      name: $("#ca").val().trim(),
-      sleepy: $("[name=sleepy]:checked").val().trim()
+    var newBurger = {
+      burger_name: $("#burger_name").val().trim(),
+      devoured: $("[name=devoured]:checked").val().trim()
     };
 
-    $.ajax("/api/cats", {
+    $.ajax("/api/burgers", {
       type: "POST",
-      data: newCat
+      data: newBurger
     }).then(
       function () {
-        console.log("created new cat");
+        console.log("A new burger, fresh off the grill.");
         location.reload();
       }
     );

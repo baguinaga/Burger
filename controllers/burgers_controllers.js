@@ -4,11 +4,11 @@ const router = express.Router();
 
 router.get("/", function (req, res) {
   burgers.all(function (data) {
-    const hbsObject = {
+    const burgersObj = {
       burgers: data
     };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
+    console.log(burgersObj);
+    res.render("index", burgersObj);
   });
 });
 

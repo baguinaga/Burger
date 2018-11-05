@@ -4,12 +4,13 @@ function printQuestionMarks(num) {
   return (",?".repeat(num).replace(/(^,)|(,$)/g, ""));
 }
 
-function objToSql(ob) {
+function objToSql(obj) {
   const arr = [];
 
-  for (const key in ob) {
-    let value = ob[key];
-    if (Object.hasOwnProperty.call(ob, key)) {
+  for (const key in obj) {
+    let value = obj[key];
+    if (Object.hasOwnProperty.call(obj, key)) {
+
       if (typeof value === "string" && value.indexOf(" ") >= 0) {
         value = "'" + value + "'";
       }
@@ -21,26 +22,19 @@ function objToSql(ob) {
 
 const orm = {
   all: function (tableInput, cb) {
-    const queryString = "SELECT * FROM " + tableInput + ";";
+    const queryString = `SELECT * FROM ${tableInput};`;
     connection.query(queryString, function (err, result) {
       if (err) {
         throw err;
       }
+      
       cb(result);
     });
   },
   create: function (table, cols, vals, cb) {
-    let queryString = "INSERT INTO " + table;
-
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
-
+    const queryString = `INSERT INTO ${table} (${cols.toString()}) VALUES (${printQuestionMarks(vals.length)});`;
+    
     console.log(queryString);
-
     connection.query(queryString, vals, function (err, result) {
       if (err) {
         throw err;
@@ -50,12 +44,7 @@ const orm = {
     });
   },
   update: function (table, objColVals, condition, cb) {
-    let queryString = "UPDATE " + table;
-
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
+    let queryString = `UPDATE ${table} SET ${objToSql(objColVals)} WHERE ${condition};`;
 
     console.log(queryString);
     connection.query(queryString, function (err, result) {
@@ -67,10 +56,9 @@ const orm = {
     });
   },
   delete: function (table, condition, cb) {
-    let queryString = "DELETE FROM " + table;
-    queryString += " WHERE ";
-    queryString += condition;
+    const queryString = `DELETE FROM ${table} WHERE ${condition};`;
 
+    console.log(queryString);
     connection.query(queryString, function (err, result) {
       if (err) {
         throw err;
